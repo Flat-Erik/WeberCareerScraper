@@ -1,0 +1,45 @@
+<%= image_tag("pageloader.gif", size: "50", id: "loading") %>
+
+<%= form_tag '/jobs' do %>
+
+<p>Showing <%= @jobs.size %> jobs. <%= link_to "Scrape for more!", "jobs/scrape", id: "dee" %></p>
+
+<%= submit_tag "Remove checked jobs" %>
+
+<table>
+	<tr>
+		<th></th>
+		<th>name:</th>
+		<th>org:</th>
+		<th>id:</th>
+	</tr>
+
+	<% @jobs.each do |job| %>
+		<% if job.viewed %>
+		<tr>
+		<% else %>
+		<tr style="background-color:#66ff66">
+		<% end %>
+			<td><%= check_box_tag "job_ids[#{job.id}]", job.id %></td>
+			<td><a href="<%= job.link %>"><%= job.name %></a></td>
+			<td><%= job.org %></td>
+			<td><%= job.job_id %></td>
+		</tr>
+	<% end %>
+</table>
+
+<% end %>
+
+<script type="text/javascript">
+
+$().ready(function() {
+	$("#loading").hide();
+
+	function dee () {
+		$("#loading").show();
+	}
+
+	$('#dee').click(dee);
+});
+
+</script>
