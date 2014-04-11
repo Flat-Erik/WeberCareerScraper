@@ -1,8 +1,6 @@
-# Make selecting multiple jobs easier now
-class JobsController < ApplicationController
+require 'job_scraper'
 
-	require 'nokogiri'
-	require 'open-uri'
+class JobsController < ApplicationController
 
 	def index
 		if request.post?
@@ -16,6 +14,24 @@ class JobsController < ApplicationController
 	end
 
 	def scrape
+
+		scrapings = JobScraper.new(Job.all)
+
+		viewed_jobs = scrapings.viewed
+		if viewed_jobs.size > 0
+			Job.where(job_id: viewed_jobs).update_all(viewed: true)
+		end
+
+		new_jobs = scrapings.new_jobs
+		if new_jobs.size > 0
+			Job.create(new_jobs)
+		end
+
+		removed_jobs = scrapings.removed
+		if removed_jobs.size > 0
+			Job.where(job_id: removed_jobs).delete_all
+		end
+=begin		
 		url = "http://saweb.weber.edu/saxtra/careerservicesfeed/FullListing.aspx"
 		doc = Nokogiri::HTML(open(url))
 
@@ -65,7 +81,7 @@ class JobsController < ApplicationController
 				puts names[x] + " done"
 			end		
 		end
-
+=end
 		redirect_to action: 'index'
 	end
 
