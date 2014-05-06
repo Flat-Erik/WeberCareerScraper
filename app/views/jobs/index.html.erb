@@ -2,7 +2,7 @@
 
 <%= form_tag '/jobs' do %>
 
-<p>Showing <%= @jobs.size %> jobs. <%= link_to "Scrape for more!", "jobs/scrape", id: "dee" %></p>
+<p>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", "jobs/scrape", id: "dee" %></p>
 
 <%= submit_tag "Remove checked jobs" %>
 
