@@ -2,9 +2,9 @@
 
 <%= form_tag '/jobs' do %>
 
-<p>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", "jobs/scrape", id: "dee" %></p>
+<p>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", params.merge(controller:"jobs", action:"scrape"), id:"dee" %></p>
 
-<%= submit_tag "Remove checked jobs" %>
+<%= submit_tag "Remove checked jobs", class: "btn btn-default" %>
 
 <table>
 	<tr>
