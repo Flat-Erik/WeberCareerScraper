@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411133914) do
+ActiveRecord::Schema.define(version: 20170928180210) do
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20140411133914) do
     t.datetime "updated_at"
     t.boolean  "viewed"
     t.boolean  "deleted"
+  end
+
+  create_table "ksls", force: true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.string   "org"
+    t.boolean  "viewed"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

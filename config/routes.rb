@@ -1,17 +1,19 @@
 Scraper::Application.routes.draw do
+  get "ksls" => "ksls#index"
+  get "ksls/scrape"
   #get "welcome/index"
 
   get "jobs/scrape"
   get "jobs" => "jobs#index"
   post 'jobs' => 'jobs#index'
 
-  
+
   # resources :jobs
 
 
 
   root 'jobs#index'
-	
+
   # resources :scrapings
 
 
