@@ -1,5 +1,6 @@
 <%= image_tag("pageloader.gif", size: "50", id: "loading") %>
 
+<h1>Jobs from WSU</h1>
 <%= form_tag '/jobs' do %>
 
 <p>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", params.merge(controller:"jobs", action:"scrape"), id:"dee" %></p>

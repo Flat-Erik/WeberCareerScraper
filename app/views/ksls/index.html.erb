@@ -1,3 +1,44 @@
-<h1>Ksls#index</h1>
-<p>Find me in app/views/ksls/index.html.erb</p>
+<%= image_tag("pageloader.gif", size: "50", id: "loading") %>
+
+<h1>Jobs from KSL</h1>
+<%= form_tag '/ksls' do %>
+
 <p>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", params.merge(controller:"ksls", action:"scrape"), id:"dee" %></p>
+
+<%= submit_tag "Remove checked jobs", class: "btn btn-default" %>
+
+<table>
+	<tr>
+		<th></th>
+		<th>name:</th>
+		<th>org:</th>
+	</tr>
+
+	<% @jobs.each do |job| %>
+		<% if job.viewed %>
+		<tr>
+		<% else %>
+		<tr style="background-color:#66ff66">
+		<% end %>
+			<td><%= check_box_tag "links[#{job.link}]", job.link %></td>
+			<td><a href="<%= job.link %>"><%= job.name %></a></td>
+			<td><%= job.org %></td>
+		</tr>
+	<% end %>
+</table>
+
+<% end %>
+
+<script type="text/javascript">
+
+$().ready(function() {
+	$("#loading").hide();
+
+	function dee () {
+		$("#loading").show();
+	}
+
+	$('#dee').click(dee);
+});
+
+</script>

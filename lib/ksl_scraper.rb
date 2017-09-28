@@ -20,13 +20,6 @@ class KslScraper
 		@new_jobs = [] # New jobs - add to db
 		@viewed_jobs = [] # Jobs already in db - set viewed true
 
-		url = "https://www.ksl.com/jobs/search/miles/0/keywords/software%20engineer/page/1"
-    scrape_url url
-
-		puts "************** Page Jobs: ***************"
-		puts @page_jobs.size > 0 ? @page_jobs.size : "None."
-		puts "************** /Page Jobs ***************"
-
 		puts "************** Db Jobs: ***************"
 		puts @jobs.size > 0 ? @jobs.size : "None."
 		puts "************** /Db Jobs ***************"
@@ -42,7 +35,7 @@ class KslScraper
 		#Grab links and Job Names
 		doc.css("h2.job-title a").each do |item|
 			names << item.text
-			link << item[:href]
+			link << "https://ksl.com" + item[:href]
 		end
 
 		#Grab Org names and Job ID Nos
@@ -50,13 +43,6 @@ class KslScraper
 			orgs << item.text
 		end
 
-		# # Housekeeping
-		# table_stuff = table_stuff - ["Job #:", "Organization Name:"]
-		# orgs = table_stuff.select.each_with_index { |val, i| i.even? }
-		# ids = table_stuff.select.each_with_index { |val, i| i.odd? }
-    puts link.size
-    puts orgs.size
-    puts names.size
 		#Test array sizes match
 		if link.size == orgs.size && orgs.size == names.size
 			0.upto(link.size-1) do |x|
@@ -76,7 +62,10 @@ class KslScraper
     if url != nil
       scrape_url "https://ksl.com" + url[:href]
     end
-    # need to att https://ksl.com
+		
+		puts "************** Page Jobs: ***************"
+		puts @page_jobs.size > 0 ? @page_jobs.size : "None."
+		puts "************** /Page Jobs ***************"
   end
 
 	# This will return an array of jobs to add to db
@@ -85,8 +74,8 @@ class KslScraper
 		page_job_ids = []
 		new_job_ids = []
 
-		@page_jobs.each { |x| page_job_ids.push(x[:job_id]) }
-		@jobs.each { |x| db_job_ids.push(x[:job_id]) }
+		@page_jobs.each { |x| page_job_ids.push(x[:link]) }
+		@jobs.each { |x| db_job_ids.push(x[:link]) }
 		new_job_ids = page_job_ids.reject do |p|
 			db_job_ids.detect do |d|
 				d.to_s == p.to_s
@@ -98,7 +87,7 @@ class KslScraper
 		puts "************** /New Job Ids ***************"
 
 		@page_jobs.each do |x|
-			if new_job_ids.detect { |n| x[:job_id] == n }
+			if new_job_ids.detect { |n| x[:link] == n }
 				@new_jobs.push(x)
 			end
 		end
@@ -116,7 +105,7 @@ class KslScraper
 
 		@jobs.each do |j|
 			unless j.viewed
-				viewed_job_ids.push(j[:job_id])
+				viewed_job_ids.push(j[:link])
 			end
 		end
 
@@ -133,8 +122,8 @@ class KslScraper
 		page_job_ids = []
 		removed_job_ids = []
 
-		@page_jobs.each { |x| page_job_ids.push(x[:job_id]) }
-		@jobs.each { |x| db_job_ids.push(x[:job_id]) }
+		@page_jobs.each { |x| page_job_ids.push(x[:link]) }
+		@jobs.each { |x| db_job_ids.push(x[:link]) }
 		removed_job_ids = db_job_ids.reject do |d|
 			page_job_ids.detect do |p|
 				d.to_s == p.to_s

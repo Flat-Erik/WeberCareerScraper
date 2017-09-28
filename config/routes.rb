@@ -1,5 +1,6 @@
 Scraper::Application.routes.draw do
   get "ksls" => "ksls#index"
+  post 'ksls' => 'ksls#index'
   get "ksls/scrape"
   #get "welcome/index"
 
