@@ -13,7 +13,7 @@ Scraper::Application.routes.draw do
 
 
 
-  root 'jobs#index'
+  root 'ksls#index'
 
   # resources :scrapings
 
