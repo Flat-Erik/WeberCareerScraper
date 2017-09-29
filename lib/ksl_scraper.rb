@@ -47,13 +47,16 @@ class KslScraper
 		if link.size == orgs.size && orgs.size == names.size
 			0.upto(link.size-1) do |x|
 
-				hash = {
+				# Don't keep multiple links
+				if @page_jobs.detect {|p| p[:link] == link[x]} == nil
+					hash = {
 						name: names[x],
 						link: link[x],
 						org: orgs[x]
-						}
+					}
 
-				@page_jobs.push(hash)
+					@page_jobs.push(hash)
+				end
 
 			end # End loop
 		end # End if
@@ -62,7 +65,7 @@ class KslScraper
     if url != nil
       scrape_url "https://ksl.com" + url[:href]
     end
-		
+
 		puts "************** Page Jobs: ***************"
 		puts @page_jobs.size > 0 ? @page_jobs.size : "None."
 		puts "************** /Page Jobs ***************"
