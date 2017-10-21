@@ -1,6 +1,6 @@
 == README
 
-A small rails app that pulls job postings from Weber State University's Carrer Services web page (http://www.weber.edu/careerservices) and allows hiding of unwanted jobs.
+A small rails app that scrapes KSL's job board (https://www.ksl.com/jobs/) and Weber State University's Carrer Services web page (http://www.weber.edu/careerservices) and allows hiding of unwanted jobs.
 
 * Ruby version
 2.1.0
