@@ -36,6 +36,11 @@ class KslScraper
 			orgs << item.text
 		end
 
+		#Grab posted date
+		doc.css("span.posted-time").each do |item|
+			posted << item.text.to_date
+		end
+
 		#Test array sizes match
 		if link.size == orgs.size && orgs.size == names.size
 			0.upto(link.size-1) do |x|
@@ -49,7 +54,8 @@ class KslScraper
 					hash = {
 						name: names[x],
 						link: link[x],
-						org: orgs[x]
+						org: orgs[x],
+						posted: posted[x]
 					}
 					Ksl.create(hash)
 				end

@@ -12,6 +12,7 @@
 		<th></th>
 		<th>name:</th>
 		<th>org:</th>
+		<th>posted:</th>
 	</tr>
 
 	<% @jobs.each do |job| %>
@@ -23,6 +24,7 @@
 			<td><%= check_box_tag "links[#{job.link}]", job.link %></td>
 			<td><a href="<%= job.link %>"><%= job.name %></a></td>
 			<td><%= job.org %></td>
+			<td><%= job.posted %></td>
 		</tr>
 	<% end %>
 </table>

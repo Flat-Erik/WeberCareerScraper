@@ -7,7 +7,7 @@ class KslsController < ApplicationController
 			 Ksl.update_all({deleted: true}, :link => params[:links].keys)
 			end
     end
-    @jobs = Ksl.all(:order => 'viewed asc, updated_at desc')
+    @jobs = Ksl.all(:order => 'viewed asc, posted desc')
 		@total = @jobs.count
 		@jobs = @jobs.select { |j| j.deleted != true }
   end
