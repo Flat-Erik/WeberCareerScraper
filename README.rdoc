@@ -2,9 +2,9 @@
 
 A small rails app that scrapes KSL's job board (https://www.ksl.com/jobs/) and Weber State University's Carrer Services web page (http://www.weber.edu/careerservices) and allows hiding of unwanted jobs.
 
-* Ruby version
+=== Ruby version
 2.1.0
 
-* System dependencies
+=== System dependencies
 This project uses Nokogiri for HTML scraping and parsing, and requires libxml2 and libxslt.
 
