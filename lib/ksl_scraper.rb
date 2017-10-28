@@ -14,6 +14,8 @@ class KslScraper
 
 	def initialize
 		@scraped_links = [] # Links found while scraping
+
+		Ksl.where(viewed: false).update_all viewed: true # Good place to change this
 	end
 
 	def do_stuff(url)
@@ -22,7 +24,6 @@ class KslScraper
 		link = [] # HREFs
 		orgs = [] # Org names
 		posted = [] # date posted
-		viewed_jobs = [] # TODO
 
 		#Grab links and Job Names
 		doc.css("h2.job-title a").each do |item|
@@ -46,22 +47,19 @@ class KslScraper
 			0.upto(link.size-1) do |x|
 
 				job = Ksl.find_by link: link[x]
-				if job != nil # If job in DB
-					if !job.viewed
-						viewed_jobs.push job[:id]
-					end
-				else # else, create it
+				if job == nil # If job in DB
 					hash = {
 						name: names[x],
 						link: link[x],
 						org: orgs[x],
-						posted: posted[x]
+						posted: posted[x],
+						viewed: false
 					}
 					Ksl.create(hash)
 				end
 			end # End loop
 		end # End if
-		Ksl.where(id: viewed_jobs).update_all viewed: true
+
 		url = doc.css("a.next.link")[0]
     if url != nil
 			# Scrape the next page
