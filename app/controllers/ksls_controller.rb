@@ -10,6 +10,8 @@ class KslsController < ApplicationController
     @jobs = Ksl.all(:order => 'viewed asc, posted desc')
 		@total = @jobs.count
 		@jobs = @jobs.select { |j| j.deleted != true }
+    render
+    Ksl.where(viewed: false).update_all viewed: true # Good place to change this
   end
 
   def scrape

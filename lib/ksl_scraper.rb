@@ -14,8 +14,6 @@ class KslScraper
 
 	def initialize
 		@scraped_links = [] # Links found while scraping
-
-		Ksl.where(viewed: false).update_all viewed: true # Good place to change this
 	end
 
 	def do_stuff(url)
