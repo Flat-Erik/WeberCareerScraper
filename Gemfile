@@ -3,7 +3,11 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+# Web scraping
 gem 'nokogiri', '1.6.1'
+
+# Scheduled tasks
+gem 'whenever', :require => false
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
