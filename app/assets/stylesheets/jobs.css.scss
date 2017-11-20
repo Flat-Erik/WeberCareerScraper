@@ -13,28 +13,6 @@ img#loading {
 	z-index:5;
 }
 
-body {
-	font-family: helvetica;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-th {
-	text-align: left;
-}
-
 input[type="checkbox"] {
-    display:inline-block;
-    width:19px;
-    height:19px;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	background-color:#FF704D;
+    height: 20px;
 }

@@ -3,33 +3,38 @@
 <h1>Jobs from KSL</h1>
 <%= form_tag '/ksls' do %>
 
-<p>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", params.merge(controller:"ksls", action:"scrape"), id:"dee" %></p>
+<h3>Showing <%= @jobs.size %> of <%= @total %> jobs. <%= link_to "Scrape for more!", params.merge(controller:"ksls", action:"scrape"), id:"dee" %></h3>
 
-<%= submit_tag "Remove checked jobs", class: "btn btn-default" %>
+<%= submit_tag "Remove checked jobs", class: "btn btn-danger btn-lg" %>
 
-<table>
-	<tr>
-		<th></th>
-		<th>name:</th>
-		<th>org:</th>
-		<th>posted:</th>
-	</tr>
+<br />
+<br />
+
+<div class="container-fluid">
 
 	<% @jobs.each do |job| %>
 		<% if job.viewed %>
-		<tr>
+		<div class="row">
 		<% else %>
-		<tr style="background-color:#66ff66">
+		<div class="row" style="background-color:#66ff66">
 		<% end %>
-			<td><%= check_box_tag "links[#{job.link}]", job.link %></td>
-			<td><a href="<%= job.link %>"><%= job.name %></a></td>
-			<td><%= job.org %></td>
-			<td><%= job.posted %></td>
-		</tr>
+			<div class="col-xs-1 col-lg-1">
+				<%= check_box_tag "links[#{job.link}]", job.link %>
+			</div>
+			<div class="col-xs-11 col-lg-11">
+				<div class="row">
+					<div class="col-xs-11 col-lg-3"><big><big><a href="<%= job.link %>"><%= job.name %></a></big></big></div>
+					<div class="col-xs-6 col-lg-2"><big><big><%= job.org %></big></big></div>
+					<div class="col-xs-5 col-lg-2"><big><big><%= job.posted %></big></big></div>
+				</div>
+			</div>
+		</div>
 	<% end %>
-</table>
+</div>
 
 <% end %>
+
+
 
 <script type="text/javascript">
 
