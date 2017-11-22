@@ -4,10 +4,10 @@ class KslsController < ApplicationController
   def index
     if request.post?
       unless params[:links] == nil
-			 Ksl.update_all({deleted: true}, :link => params[:links].keys)
+			Ksl.where(link: params[:links].keys).update_all(deleted: true)
 			end
     end
-    @jobs = Ksl.all(:order => 'viewed asc, posted desc')
+    @jobs = Ksl.all.order(:viewed, posted: :desc)
 		@total = @jobs.count
 		@jobs = @jobs.select { |j| j.deleted != true }
     render

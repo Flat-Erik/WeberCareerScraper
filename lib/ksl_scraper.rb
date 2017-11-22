@@ -66,6 +66,6 @@ class KslScraper
 	end
 
 	def remove_stuff
-		Ksl.where.not(link: @scraped_links).destroy_all
+		Ksl.where.not(link: @scraped_links).delete_all
 	end
 end

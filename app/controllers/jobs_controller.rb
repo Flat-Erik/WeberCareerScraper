@@ -5,10 +5,10 @@ class JobsController < ApplicationController
 	def index
 		if request.post?
 			unless params[:job_ids] == nil
-			 Job.update_all({deleted: true}, :id => params[:job_ids].keys)
+				Job.where(id: params[:job_ids].keys).update_all(deleted: true)
 			end
 		end
-		@jobs = Job.all(:order => 'viewed asc, job_id desc')
+		@jobs = Job.all.order(:viewed, job_id: :desc)
 		@total = @jobs.count
 		@jobs = @jobs.select { |j| j.deleted != true }
 	end
