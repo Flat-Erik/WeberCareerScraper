@@ -13,21 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20171021180648) do
 
-  create_table "jobs", force: true do |t|
-    t.string   "name"
-    t.text     "link"
-    t.string   "job_id"
-    t.string   "org"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "viewed"
-    t.boolean  "deleted"
-  end
-
-  create_table "ksls", force: true do |t|
-    t.string   "name"
-    t.string   "link"
-    t.string   "org"
+  create_table "ksls", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "link",       limit: 255
+    t.string   "org",        limit: 255
     t.boolean  "viewed"
     t.boolean  "deleted"
     t.datetime "created_at"
