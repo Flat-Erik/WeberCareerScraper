@@ -45,7 +45,11 @@ class KslScraper
 			0.upto(link.size-1) do |x|
 
 				job = Ksl.find_by link: link[x]
-				if job == nil # If job in DB
+				if job != nil && job.posted != posted[x]
+					job.destroy
+					job = nil
+				end
+				if job == nil
 					hash = {
 						name: names[x],
 						link: link[x],
