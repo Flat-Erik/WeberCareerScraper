@@ -4,7 +4,11 @@
 # http://en.wikipedia.org/wiki/Cron
 
 
+set :output, "/home/erik/cron_log.log"
+
 every 6.hours do
+  set :environment, 'development'
+  env :PATH, ENV['PATH']
   rake "fetch_jobs"
 end
 

@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(version: 20171021180648) do
 
   create_table "ksls", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "link",       limit: 255
-    t.string   "org",        limit: 255
+    t.string   "name"
+    t.string   "link"
+    t.string   "org"
     t.boolean  "viewed"
     t.boolean  "deleted"
     t.datetime "created_at"
