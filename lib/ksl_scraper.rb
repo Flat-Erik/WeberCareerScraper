@@ -26,8 +26,8 @@ class KslScraper
 		#Grab links and Job Names
 		doc.css("h2.job-title a").each do |item|
 			names << item.text
-			link << "https://ksl.com" + item[:href]
-			@scraped_links << "https://ksl.com" + item[:href]
+			link << "https://jobs.ksl.com" + item[:href]
+			@scraped_links << "https://jobs.ksl.com" + item[:href]
 		end
 
 		#Grab Org names and Job ID Nos
@@ -65,7 +65,7 @@ class KslScraper
 		url = doc.css("a.next.link")[0]
     if url != nil
 			# Scrape the next page
-      do_stuff "https://ksl.com" + url[:href]
+      do_stuff "https://jobs.ksl.com" + url[:href]
     end
 	end
 

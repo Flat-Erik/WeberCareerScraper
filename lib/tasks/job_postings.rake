@@ -10,8 +10,8 @@ task :fetch_jobs => :environment do
 
 	puts "Scraping KSL jobs..."
 	scrapings = KslScraper.new
-	scrapings.do_stuff "https://www.ksl.com/jobs/search/miles/0/keywords/software%20engineer/page/1"
-	scrapings.do_stuff "https://www.ksl.com/jobs/search/miles/0/keywords/software%20developer/page/1"
+	scrapings.do_stuff "https://jobs.ksl.com/search/miles/0/keywords/software%20engineer/page/1"
+	scrapings.do_stuff "https://jobs.ksl.com/search/miles/0/keywords/software%20developer/page/1"
 	scrapings.remove_stuff
 	puts "Done."
 
